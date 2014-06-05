@@ -9,7 +9,6 @@
 	<cfargument name="dir" type="string" required="yes" hint="an absolute path to a directory" >
 	<cfargument name="title" type="string" required="no" hint="what to display as a title. if blank no title displayed">
 	<cfscript>
-		var local = structnew();
 		local.result = false;
 	</cfscript>
 		<cfif len(trim(title))><h3>#title#</h3></cfif>
