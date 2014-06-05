@@ -15,30 +15,36 @@ under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
 CONDITIONS OF ANY KIND, either express or implied. See the License for the 
 specific language governing permissions and limitations under the License.
 --->
-<cfcomponent name="CFlickr" output="false">
+<cfcomponent name="CFlickr" output="false" accessors="true">
+<cfproperty name="api_key" type="string" />
+<cfproperty name="secret" type="string" />
+
 
 	<cfscript>
     variables.api_key = "";
     variables.secret = "";
-		include template="keys.no.vc.cfm";
+		include "keys.no.vc.cfm";
 		variables.token = "";
 		variables.cache = "";
 		variables.urls = {
-	    rest = 'http://api.flickr.com/services/rest/',
-	    upload = 'http://api.flickr.com/services/upload/',	
-	    replace = 'http://api.flickr.com/services/replace/',	
-		auth = 'http://www.flickr.com/services/auth/'
-	};
-	
+			rest = 'http://api.flickr.com/services/rest/',
+			upload = 'http://api.flickr.com/services/upload/',	
+			replace = 'http://api.flickr.com/services/replace/',	
+			auth = 'http://www.flickr.com/services/auth/'
+		};
 	</cfscript>
 	
 <!--- CONSTRUCTOR --->
 	<cffunction name="init" access="public" output="false" returntype="any">
-		<cfargument name="api_key" type="string" required="true" />
-		<cfargument name="secret" type="string" default="" />
+		<cfargument name="api_key" type="string" required="false" />
+		<cfargument name="secret" type="string" required="false" />
 		<cfargument name="cache" type="any" />
-		<cfset variables.api_key = arguments.api_key />
+		<cfif structKeyExists(arguments, "api_key")>
+			<cfset variables.api_key = arguments.api_key />
+		</cfif>
+		<cfif structKeyExists(arguments, "secret")>
 		<cfset variables.secret = arguments.secret />
+		</cfif>
 		<cfif structKeyExists(arguments, "cache")>
 			<cfset variables.cache = arguments.cache />
 		</cfif>
