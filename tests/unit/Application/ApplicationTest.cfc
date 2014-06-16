@@ -12,14 +12,18 @@
 		</cfscript>
 	</cffunction>
   
-	<cffunction name="testAnything" access="public" returnType="void">
+	<cffunction name="testDisplayDate" access="public" returnType="void">
     <cfscript>
 			var local = {};
 			
-			local.msg= "";
-			local.expected = "true";
-			local.actual = isObject(variables.cfc);
-			assertEquals( local.expected, local.actual, local.msg );
+			local.msg= "testing for proper date format";
+			local.expected = "2014-06-05";
+			//local.actual = variables.cfc.displayDate();
+		</cfscript>
+		<cfsavecontent variable="local.actual"><cfoutput>#variables.cfc.displaydate()#</cfoutput></cfsavecontent>
+		<cfscript>
+			local.actual = trim(local.actual);
+			assertEquals(local.expected, local.actual, local.msg);
 		</cfscript>
 	</cffunction>	
 	

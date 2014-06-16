@@ -42,9 +42,6 @@
 
 		</cfscript>
 	</cffunction>	
-
-
-
 	
 	<cffunction name="testNotImplemented" access="public" returnType="void">
 		<cfscript>
